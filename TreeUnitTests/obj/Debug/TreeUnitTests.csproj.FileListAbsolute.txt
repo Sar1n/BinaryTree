@@ -1,0 +1,16 @@
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\TreeUnitTests.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\TreeUnitTests.pdb
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\Binary_Tree_Students.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.abstractions.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.assert.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.core.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.execution.desktop.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\Binary_Tree_Students.pdb
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.abstractions.xml
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.assert.xml
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.core.xml
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\bin\Debug\xunit.execution.desktop.xml
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\obj\Debug\TreeUnitTests.csprojAssemblyReference.cache
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\obj\Debug\TreeUnitTests.csproj.CopyComplete
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\obj\Debug\TreeUnitTests.dll
+C:\data\Projects\epam\Binary_tree\TreeUnitTests\obj\Debug\TreeUnitTests.pdb
