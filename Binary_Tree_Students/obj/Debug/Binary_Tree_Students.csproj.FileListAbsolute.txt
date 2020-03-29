@@ -17,3 +17,12 @@ C:\data\Projects\epam\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.assert.xm
 C:\data\Projects\epam\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.core.xml
 C:\data\Projects\epam\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.execution.desktop.xml
 C:\data\Projects\epam\Binary_tree\Binary_Tree_Students\obj\Debug\Binary_Tree_Students.csproj.CopyComplete
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.abstractions.dll
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.assert.dll
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.core.dll
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.execution.desktop.dll
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.abstractions.xml
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.assert.xml
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.core.xml
+C:\data\Projects\Binary_tree\Binary_Tree_Students\bin\Debug\xunit.execution.desktop.xml
+C:\data\Projects\Binary_tree\Binary_Tree_Students\obj\Debug\Binary_Tree_Students.csproj.CopyComplete

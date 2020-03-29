@@ -99,7 +99,8 @@ namespace Binary_Tree_Students
 			if (Root != null)
 			{
 				Node Find = default;
-				if (RecSearch(Root, value, ref Find))
+				RecSearch(Root, value, ref Find);
+				if (Find != null)
 				{
 					FindedValue = Find.Data;
 					return true;
@@ -112,26 +113,18 @@ namespace Binary_Tree_Students
 				throw new RootIsNullException("Root is null");
 			}
 		}
-		private bool RecSearch(Node currentelement, T ToFind, ref Node Find) //Рекурсивный метод для поиска в дереве
+		private void RecSearch(Node currentelement, T ToFind, ref Node Find) //Рекурсивный метод для поиска в дереве
 		{
-			if (currentelement == null)
-			{
-				return false;
-			}
-			else
+			if (currentelement != null)
 				if (currentelement.Data.CompareTo(ToFind) > 0)
 					RecSearch(currentelement.LeftNode, ToFind, ref Find);
-			else
-			{
-				if (currentelement.Data.CompareTo(ToFind) < 0)
-					RecSearch(currentelement.RightNode, ToFind, ref Find);
 				else
 				{
-					Find = currentelement;
-					return true;
+					if (currentelement.Data.CompareTo(ToFind) < 0)
+						RecSearch(currentelement.RightNode, ToFind, ref Find);
+					else
+						Find = currentelement;
 				}
-			}
-			return false;
 		}
 		public IEnumerator GetEnumerator()
 		{
@@ -145,83 +138,117 @@ namespace Binary_Tree_Students
 			else
 				isRoot = true;
 			Node Find = default;
-			if (RecSearch(Root, ToDelete, ref Find))
+			RecSearch(Root, ToDelete, ref Find);
+			if (Find != null)
 			{
 				if (Find.RightNode == null) //Случай 1: У удаляемого узла нет правого ребенка
-					if (Find.LeftNode != null)
+				{
+					if (Find.LeftNode != null) // Если есть левый узел
 					{
 						if (!isRoot) //Удаляемый элемент - не корень
-							if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
-							{
-								Find.ParentNode.LeftNode = Find.LeftNode; //Заменяем дочерний элемент у родителя
-								Find.LeftNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
-							}
-							else                                                         // Удаляемый узел - Правый
-							{
-								Find.ParentNode.RightNode = Find.LeftNode; //Заменяем дочерний элемент у родителя
-								Find.RightNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
-							}
+						{
+							if (Find.ParentNode.LeftNode != null) // Если у родительского узла есть левый узел
+								if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
+								{
+									Find.ParentNode.LeftNode = Find.LeftNode; //Заменяем дочерний элемент у родителя
+									Find.LeftNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
+								}
+							if (Find.ParentNode.RightNode != null) // Если у родительского узла есть правый узел                     
+								if (Find.ParentNode.RightNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Правый
+								{
+									Find.ParentNode.RightNode = Find.LeftNode; //Заменяем дочерний элемент у родителя
+									Find.LeftNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
+								}
+						}
 						else //Удаляемый элемент - корень
+						{
 							Root = Find.LeftNode;
-						return true;
+							Root.ParentNode = default;
+						}
 					}
-					else
-					if (Find.RightNode.LeftNode == null) //Случай 2: У удаляемого узла есть правый ребенок, у которого, в свою очередь нет левого ребенка
+					else // Если нет дочерних узлов
 					{
-						Find.RightNode.LeftNode = Find.LeftNode; //Перемещаем левое поддерево на лево правого
 						if (!isRoot) //Удаляемый элемент - не корень
+						{
+							if (Find.ParentNode.LeftNode != null) // Если у родительского узла есть левый узел
+								if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
+									Find.ParentNode.LeftNode = default; //Обнуляем дочерний элемент у родителя
+							if (Find.ParentNode.RightNode != null) // Если у родительского узла есть правый узел                     
+								if (Find.ParentNode.RightNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Правый
+									Find.ParentNode.RightNode = Find.LeftNode; //Обнуляем дочерний элемент у родителя
+						}
+						else //Удаляемый элемент - корень
+							Root = default; //Обнуляем корень
+					}
+					return true;
+				}
+				else
+				if (Find.RightNode.LeftNode == null) //Случай 2: У удаляемого узла есть правый ребенок, у которого, в свою очередь нет левого ребенка
+				{
+					if (Find.LeftNode != null) //Если есть левое поддерево
+						Find.RightNode.LeftNode = Find.LeftNode; //То перемещаем его на лево правого поддерева
+					if (!isRoot) //Удаляемый элемент - не корень
+					{
+						if (Find.ParentNode.LeftNode != null) // Если у родительского узла есть левый узел
 							if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
 							{
 								Find.ParentNode.LeftNode = Find.RightNode; //Заменяем дочерний элемент у родителя
 								Find.LeftNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
 							}
-							else                                                         // Удаляемый узел - Правый
+						if (Find.ParentNode.RightNode != null) // Если у родительского узла есть правый узел
+							if (Find.ParentNode.RightNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Правый
 							{
 								Find.ParentNode.RightNode = Find.RightNode; //Заменяем дочерний элемент у родителя
 								Find.RightNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
 							}
-						else //Удаляемый элемент - корень
-							Root = Find.RightNode;
-						return true;
 					}
-					else //Случай 3: У удаляемого узла есть правый ребенок, у которого есть левый ребенок
+					else //Удаляемый элемент - корень
 					{
-						Node FarLeft = default;
-						if (GiveFarLeft(Find.RightNode, ref FarLeft))
-						{
-							FarLeft.LeftNode = Find.LeftNode;
-							if (!isRoot) //Удаляемый элемент - не корень
-								if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
-								{
-									Find.ParentNode.LeftNode = FarLeft; //Заменяем дочерний элемент у родителя
-									Find.LeftNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
-								}
-								else                                                         // Удаляемый узел - Правый
-								{
-									Find.ParentNode.RightNode = FarLeft; //Заменяем дочерний элемент у родителя
-									Find.RightNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
-								}
-							else //Удаляемый элемент - корень
-								Root = FarLeft;
-							FarLeft.ParentNode.LeftNode = default;
-							return true;
-						}
+						Root = Find.RightNode;
+						Root.ParentNode = default;
 					}
+					return true;
+				}
+				else //Случай 3: У удаляемого узла есть правый ребенок, у которого есть левый ребенок
+				{
+					Node FarLeft = default;
+					GiveFarLeft(Find.RightNode, ref FarLeft); // Получаем ссылку на самый левый элемент правого поддерева
+
+					if (Find.LeftNode != null)
+					{
+						FarLeft.LeftNode = Find.LeftNode; //Помещаем левое поддерево удаляемого узла на лево самого левого узла правого поддерева удаляемого элемента
+						Find.LeftNode.ParentNode = FarLeft;
+					}
+
+					if (!isRoot) //Удаляемый элемент - не корень
+					{
+						if (Find.ParentNode.LeftNode != null) // Если у родительского узла есть левый узел
+							if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
+								Find.ParentNode.LeftNode = FarLeft; //Заменяем дочерний элемент у родителя
+						if (Find.ParentNode.RightNode != null) // Если у родительского узла есть правый узел
+							if (Find.ParentNode.RightNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Правый
+								Find.ParentNode.RightNode = FarLeft; //Заменяем дочерний элемент у родителя
+						FarLeft.ParentNode.LeftNode = default;
+						FarLeft.ParentNode = Find.ParentNode;
+					}
+					else //Удаляемый элемент - корень
+					{
+						Root = FarLeft;
+						FarLeft.ParentNode.LeftNode = default;
+						Root.ParentNode = default;
+					}
+					return true;
+				}
 			}
 			else
 				return false;
-			return false;
 		}
-		private bool GiveFarLeft(Node currentelement, ref Node LeftReult) //(Для удаления) Метод для поиска самого левого элемента
+		private void GiveFarLeft(Node currentelement, ref Node LeftResult) //(Для удаления) Метод для поиска самого левого элемента
 		{
 			if (currentelement.LeftNode != null)
-				GiveFarLeft(currentelement.LeftNode, ref LeftReult);
+				GiveFarLeft(currentelement.LeftNode, ref LeftResult);
 			else
-			{
-				LeftReult = currentelement;
-				return true;
-			}
-			return false;
+				LeftResult = currentelement;
 		}
 		private bool ReplaceElement(Node k)
 		{
