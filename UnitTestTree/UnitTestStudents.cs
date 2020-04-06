@@ -10,7 +10,7 @@ namespace UnitTestTree
 		[TestMethod]
 		public void StudentToStringMustReturnExpectedString()
 		{
-			//arragne
+			//arrange
 			Student TestStudent = new Student("Winnie The Pooh", "Hole Test", DateTime.Parse("01.01.2020"), 95);
 			string expected = $"Winnie The Pooh scored 95 on test \"Hole Test\" on 01.01.2020 0:00:00";
 
@@ -27,7 +27,7 @@ namespace UnitTestTree
 		[DataTestMethod]
 		public void StudentComparasingMustReturnCorrectAnswer(string studname1, string testname1, int grade1, string studname2, string testname2, int grade2, int expected)
 		{
-			//arragne
+			//arrange
 			Student TestStudent1 = new Student(studname1, testname1, DateTime.Parse("01.01.2020"), grade1);
 			Student TestStudent2 = new Student(studname2, testname2, DateTime.Parse("01.01.2020"), grade2);
 
@@ -37,5 +37,6 @@ namespace UnitTestTree
 			//assert
 			Assert.AreEqual(expected, actual, "The student not converting to string correctly");
 		}
+
 	}
 }

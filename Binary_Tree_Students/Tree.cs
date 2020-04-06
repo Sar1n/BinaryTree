@@ -30,9 +30,10 @@ namespace Binary_Tree_Students
 		}
 		public override string ToString()
 		{
-			string consoletree = "";
+			string res = "";
+			NLR(ref res);
 
-			return consoletree;
+			return res;
 		}
 		public void NLR(ref string res) //Не рекурсивный метод для удобного вызова прямого обхода дерева
 		{
@@ -126,7 +127,7 @@ namespace Binary_Tree_Students
 						Find = currentelement;
 				}
 		}
-		public IEnumerator GetEnumerator()
+		public IEnumerator GetEnumerator() 
 		{
 			return Root.GetEnumerator();
 		}
@@ -191,16 +192,11 @@ namespace Binary_Tree_Students
 					{
 						if (Find.ParentNode.LeftNode != null) // Если у родительского узла есть левый узел
 							if (Find.ParentNode.LeftNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Левый
-							{
 								Find.ParentNode.LeftNode = Find.RightNode; //Заменяем дочерний элемент у родителя
-								Find.LeftNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
-							}
 						if (Find.ParentNode.RightNode != null) // Если у родительского узла есть правый узел
 							if (Find.ParentNode.RightNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Правый
-							{
 								Find.ParentNode.RightNode = Find.RightNode; //Заменяем дочерний элемент у родителя
-								Find.RightNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
-							}
+						Find.RightNode.ParentNode = Find.ParentNode; //Заменяем родительский элемент
 					}
 					else //Удаляемый элемент - корень
 					{
@@ -213,13 +209,15 @@ namespace Binary_Tree_Students
 				{
 					Node FarLeft = default;
 					GiveFarLeft(Find.RightNode, ref FarLeft); // Получаем ссылку на самый левый элемент правого поддерева
-
+					T CopiedFL = FarLeft.Data; //Копируем значение самого левого элемента
+					DeleteElement(FarLeft.Data); //Удаляем самый левый элемент из дерева
+					FarLeft = new Node(CopiedFL);
+					FarLeft.RightNode = Find.RightNode;
 					if (Find.LeftNode != null)
 					{
 						FarLeft.LeftNode = Find.LeftNode; //Помещаем левое поддерево удаляемого узла на лево самого левого узла правого поддерева удаляемого элемента
 						Find.LeftNode.ParentNode = FarLeft;
 					}
-
 					if (!isRoot) //Удаляемый элемент - не корень
 					{
 						if (Find.ParentNode.LeftNode != null) // Если у родительского узла есть левый узел
@@ -228,13 +226,11 @@ namespace Binary_Tree_Students
 						if (Find.ParentNode.RightNode != null) // Если у родительского узла есть правый узел
 							if (Find.ParentNode.RightNode.Data.CompareTo(Find.Data) == 0) // Удаляемый узел - Правый
 								Find.ParentNode.RightNode = FarLeft; //Заменяем дочерний элемент у родителя
-						FarLeft.ParentNode.LeftNode = default;
 						FarLeft.ParentNode = Find.ParentNode;
 					}
 					else //Удаляемый элемент - корень
 					{
 						Root = FarLeft;
-						FarLeft.ParentNode.LeftNode = default;
 						Root.ParentNode = default;
 					}
 					return true;
@@ -249,10 +245,6 @@ namespace Binary_Tree_Students
 				GiveFarLeft(currentelement.LeftNode, ref LeftResult);
 			else
 				LeftResult = currentelement;
-		}
-		private bool ReplaceElement(Node k)
-		{
-			return true;
 		}
 	}
 }
